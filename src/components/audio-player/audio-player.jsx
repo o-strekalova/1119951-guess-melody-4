@@ -39,7 +39,7 @@ export default class AudioPlayer extends PureComponent {
 
     audio.ontimeupdate = () => {
       this.setState({
-        progress: this._audio.currentTime
+        progress: this._audioRef.currentTime
       });
     };
   }
@@ -66,7 +66,9 @@ export default class AudioPlayer extends PureComponent {
           type="button"
           disabled={isLoading}
           onClick={() => {
-            this.setState({isPlaying: !this.state.isPlaying});
+            this.setState((prevState) => {
+              return {isPlaying: !prevState.isPlaying};
+            });
             onPlayButtonClick();
           }}
         />
