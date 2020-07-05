@@ -7,7 +7,7 @@ const withActivePlayer = (Component) => {
       super(props);
 
       this.state = {
-        activePlayerId: -1,
+        activePlayerId: 0,
       };
     }
 

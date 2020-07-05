@@ -14,7 +14,7 @@ it(`Click on user answer should pass to the callback data-object from which this
   const onAnswer = jest.fn();
   const userAnswer = {
     artist: `John Snow`,
-    picture: `https://api.adorable.io/avatars/128/0`,
+    picture: `https://api.adorable.io/avatars/128/A`,
   };
 
   const screen = shallow(
