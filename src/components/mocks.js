@@ -24,13 +24,13 @@ export const questions = [
       src: `https://upload.wikimedia.org/wikipedia/commons/4/4e/BWV_543-fugue.ogg`,
     },
     answers: [{
-      picture: `${AVATAR_URL}/0`,
+      picture: `${AVATAR_URL}/A`,
       artist: `John Snow`,
     }, {
-      picture: `${AVATAR_URL}/1`,
+      picture: `${AVATAR_URL}/AB`,
       artist: `Jack Daniels`,
     }, {
-      picture: `${AVATAR_URL}/2`,
+      picture: `${AVATAR_URL}/AC`,
       artist: `Jim Beam`,
     }],
   }
