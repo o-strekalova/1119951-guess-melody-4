@@ -1,12 +1,10 @@
-import {extend} from "./utils";
-import {GameType} from "./const.js";
-import questions from "./mocks/questions.js";
+import {extend} from "../../utils";
+import {GameType} from "../../const";
 
 const initialState = {
   mistakes: 0,
   maxMistakes: 3,
   step: -1,
-  questions,
 };
 
 const ActionType = {
@@ -60,19 +58,16 @@ const ActionCreator = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionType.INCREMENT_STEP:
-
       return extend(state, {
         step: state.step + action.payload,
       });
 
     case ActionType.INCREMENT_MISTAKES:
-
       return extend(state, {
         mistakes: state.mistakes + action.payload,
       });
 
     case ActionType.RESET:
-
       return extend(initialState, {
         step: 0,
       });
