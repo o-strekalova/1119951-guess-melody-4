@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import GenreQuestionScreen from './genre-question-screen.jsx';
+import React from "react";
+import renderer from "react-test-renderer";
+import GenreQuestionScreen from "./genre-question-screen";
 import {genreQuestion} from "../mocks";
 
 it(`GenreQuestionScreen is rendered correctly`, () => {
