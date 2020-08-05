@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 import {AnswerGenre} from "../../types";
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   userAnswer: boolean;
 }
 
-class GenreQuestionItem extends PureComponent<Props, null> {
+class GenreQuestionItem extends React.PureComponent<Props, null> {
   render() {
     const {
       answer,

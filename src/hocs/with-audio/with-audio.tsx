@@ -1,4 +1,4 @@
-import React, {createRef, PureComponent, RefObject} from "react";
+import * as React from "react";
 
 interface Props {
   isPlaying: boolean;
@@ -8,23 +8,23 @@ interface Props {
 
 interface State {
   isLoading: boolean;
-  isPlaying: boolean;
+  isPlayingReal: boolean;
   progress: number;
 }
 
 const withAudio = (Component) => {
-  class WithAudio extends PureComponent<Props, State> {
-    private audioRef: RefObject<HTMLAudioElement>;
+  class WithAudio extends React.PureComponent<Props, State> {
+    private audioRef: React.RefObject<HTMLAudioElement>;
 
     constructor(props) {
       super(props);
 
-      this.audioRef = createRef();
+      this.audioRef = React.createRef();
 
       this.state = {
         progress: 0,
         isLoading: true,
-        isPlaying: props.isPlaying,
+        isPlayingReal: props.isPlaying,
       };
     }
 
@@ -40,12 +40,12 @@ const withAudio = (Component) => {
 
       audio.onplay = () => {
         this.setState({
-          isPlaying: true,
+          isPlayingReal: true,
         });
       };
 
       audio.onpause = () => this.setState({
-        isPlaying: false,
+        isPlayingReal: false,
       });
 
       audio.ontimeupdate = () => this.setState({
@@ -56,7 +56,7 @@ const withAudio = (Component) => {
     componentDidUpdate() {
       const audio = this.audioRef.current;
 
-      if (this.state.isPlaying) {
+      if (this.props.isPlaying) {
         audio.play();
       } else {
         audio.pause();
@@ -74,16 +74,16 @@ const withAudio = (Component) => {
     }
 
     render() {
-      const {isLoading, isPlaying} = this.state;
+      const {isLoading, isPlayingReal} = this.state;
       const {onPlayButtonClick} = this.props;
 
       return (
         <Component
           {...this.props}
           isLoading={isLoading}
-          isPlaying={isPlaying}
+          isPlaying={isPlayingReal}
           onPlayButtonClick={() => {
-            this.setState({isPlaying: !isPlaying});
+            this.setState({isPlayingReal: !isPlayingReal});
             onPlayButtonClick();
           }}
         >

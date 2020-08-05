@@ -1,8 +1,9 @@
-import React from "react";
+import * as React from "react";
 import {configure, shallow, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as Adapter from "enzyme-adapter-react-16";
 import GenreQuestionScreen from "./genre-question-screen";
 import {genreQuestion} from "../mocks";
+import {noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
@@ -12,8 +13,8 @@ it(`When user answers genre question form is not sent`, () => {
       <GenreQuestionScreen
         onAnswer={onAnswer}
         question={genreQuestion}
-        renderPlayer={() => {}}
-        onChange={() => {}}
+        renderPlayer={() => null}
+        onChange={noop}
         userAnswers={[false, false, false, false]}
       />);
 
@@ -35,8 +36,8 @@ it(`User answer passed to callback is consistent with "userAnswer" prop`, () => 
       <GenreQuestionScreen
         onAnswer={onAnswer}
         question={genreQuestion}
-        renderPlayer={() => {}}
-        onChange={() => {}}
+        renderPlayer={() => null}
+        onChange={noop}
         userAnswers={userAnswer}
       />);
 
@@ -44,7 +45,7 @@ it(`User answer passed to callback is consistent with "userAnswer" prop`, () => 
   const inputTwo = screen.find(`input`).at(1);
 
   inputTwo.simulate(`change`, {target: {checked: true}});
-  form.simulate(`submit`, {preventDefault() {}});
+  form.simulate(`submit`, {preventDefault: noop});
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
   expect(onAnswer.mock.calls[0][0]).toEqual(void 0);

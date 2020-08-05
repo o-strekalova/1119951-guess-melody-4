@@ -1,13 +1,14 @@
-import React from "react";
+import * as React from "react";
 import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as Adapter from "enzyme-adapter-react-16";
 import ArtistQuestionScreen from "./artist-question-screen";
 import {artistQuestion} from "../mocks";
+import {noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
 const mockEvent = {
-  preventDefault() {}
+  preventDefault: noop,
 };
 
 it(`Click on user answer should pass to the callback data-object from which this answer was created`, () => {
@@ -21,7 +22,7 @@ it(`Click on user answer should pass to the callback data-object from which this
       <ArtistQuestionScreen
         onAnswer={onAnswer}
         question={artistQuestion}
-        renderPlayer={() => {}}
+        renderPlayer={() => null}
       />);
 
   const answerInputs = screen.find(`input`);

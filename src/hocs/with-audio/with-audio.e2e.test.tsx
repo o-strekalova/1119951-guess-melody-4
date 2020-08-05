@@ -1,12 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
+import * as React from "react";
 import {configure, mount} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import * as Adapter from "enzyme-adapter-react-16";
 import withAudio from "./with-audio";
+import {noop} from "../../utils";
 
 configure({adapter: new Adapter()});
 
-const Player = (props) => {
+interface PlayerProps {
+  children: React.ReactNode;
+  onPlayButtonClick: () => void;
+}
+
+const Player = (props: PlayerProps) => {
   const {onPlayButtonClick, children} = props;
   return (
     <div>
@@ -16,54 +21,62 @@ const Player = (props) => {
   );
 };
 
-Player.propTypes = {
-  onPlayButtonClick: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
-};
-
 it(`Checks that HOC's callback turn on audio (play)`, () => {
   const PlayerWrapped = withAudio(Player);
+  let isPlaying = false;
+  const onPlayButtonClick = jest.fn(() => {
+    isPlaying = !isPlaying;
+    wrapper.setProps({isPlaying});
+  });
+
   const wrapper = mount(
       <PlayerWrapped
-        isPlaying={false}
-        onPlayButtonClick={() => {}}
+        isPlaying={isPlaying}
+        onPlayButtonClick={onPlayButtonClick}
         src=""
       />);
 
-  window.HTMLMediaElement.prototype.play = () => {};
+  window.HTMLMediaElement.prototype.play = () => Promise.resolve();
 
-  const {_audioRef} = wrapper.instance();
+  const {audioRef} = wrapper.instance();
 
-  jest.spyOn(_audioRef.current, `play`);
+  jest.spyOn(audioRef.current, `play`);
 
   wrapper.instance().componentDidMount();
 
   wrapper.find(`button`).simulate(`click`);
 
-  expect(_audioRef.current.play).toHaveBeenCalledTimes(1);
+  expect(audioRef.current.play).toHaveBeenCalledTimes(1);
+  expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
+  expect(wrapper.props().isPlaying).toEqual(true);
 });
 
 it(`Checks that HOC's callback turn off audio (pause)`, () => {
   const PlayerWrapped = withAudio(Player);
+  let isPlaying = true;
+  const onPlayButtonClick = jest.fn(() => {
+    isPlaying = !isPlaying;
+    wrapper.setProps({isPlaying});
+  });
+
   const wrapper = mount(
       <PlayerWrapped
-        isPlaying={true}
-        onPlayButtonClick={() => {}}
+        isPlaying={isPlaying}
+        onPlayButtonClick={onPlayButtonClick}
         src=""
       />);
 
-  window.HTMLMediaElement.prototype.pause = () => {};
+  window.HTMLMediaElement.prototype.pause = noop;
 
-  const {_audioRef} = wrapper.instance();
+  const {audioRef} = wrapper.instance();
 
-  jest.spyOn(_audioRef.current, `pause`);
+  jest.spyOn(audioRef.current, `pause`);
 
   wrapper.instance().componentDidMount();
 
   wrapper.find(`button`).simulate(`click`);
 
-  expect(_audioRef.current.pause).toHaveBeenCalledTimes(1);
+  expect(audioRef.current.pause).toHaveBeenCalledTimes(1);
+  expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
+  expect(wrapper.props().isPlaying).toEqual(false);
 });

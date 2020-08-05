@@ -1,13 +1,13 @@
-import React, {FunctionComponent, ReactNode} from "react";
+import * as React from "react";
 import {QuestionArtist, AnswerArtist} from "../../types";
 
 interface Props {
   onAnswer: (question: QuestionArtist, answer: AnswerArtist) => void;
   question: QuestionArtist;
-  renderPlayer: (string, number) => ReactNode;
+  renderPlayer: (string, number) => React.ReactNode;
 }
 
-const ArtistQuestionScreen: FunctionComponent<Props> = (props: Props) => {
+const ArtistQuestionScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {onAnswer, question, renderPlayer} = props;
   const {
     answers,

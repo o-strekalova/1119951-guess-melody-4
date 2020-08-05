@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import * as React from "react";
 import {Route, Redirect, RouteProps} from "react-router-dom";
 import {connect} from "react-redux";
 import {AppRoute} from "../../const";
@@ -10,7 +10,7 @@ type Props = RouteProps & {
   render: () => React.ReactNode;
 }
 
-const PrivateRoute: FunctionComponent<Props> = (props: Props) => {
+const PrivateRoute: React.FunctionComponent<Props> = (props: Props) => {
   const {
     render,
     path,

@@ -2,8 +2,9 @@ import MockAdapter from "axios-mock-adapter";
 import {createAPI} from "../../api";
 import {reducer, ActionType, Operation} from "./data";
 import {questions} from "../../components/mocks";
+import {noop} from "../../utils";
 
-const api = createAPI(() => {});
+const api = createAPI(noop);
 
 it(`Reducer without additional parameters should return initial state`, () => {
   expect(reducer(void 0, {})).toEqual({
@@ -33,7 +34,7 @@ describe(`Operation work correctly`, () => {
       .onGet(`/questions`)
       .reply(200, [{fake: true}]);
 
-    return questionLoader(dispatch, () => {}, api)
+    return questionLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

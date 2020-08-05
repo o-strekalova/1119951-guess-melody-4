@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 
@@ -8,7 +8,7 @@ interface Props {
   onReplayButtonClick: () => void;
 }
 
-const WinScreen: FunctionComponent<Props> = (props: Props) => {
+const WinScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {questionsCount, mistakesCount, onReplayButtonClick} = props;
   const correctlyQuestionsCount = questionsCount - mistakesCount;
 

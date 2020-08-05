@@ -1,6 +1,7 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import AudioPlayer from "./audio-player";
+import {noop} from "../../utils";
 
 const mock = {
   song: {
@@ -15,8 +16,7 @@ it(`AudioPlayer is rendered correctly`, () => {
       <AudioPlayer
         isLoading={true}
         isPlaying={false}
-        onPlayButtonClick={() => {}}
-        src={song.src}
+        onPlayButtonClick={noop}
       >
         <audio />
       </AudioPlayer>, {

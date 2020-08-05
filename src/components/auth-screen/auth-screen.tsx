@@ -1,19 +1,19 @@
-import React, {PureComponent, createRef, RefObject} from "react";
+import * as React from "react";
 
 interface Props {
   onSubmit: ({login, password}: {login: string; password: string}) => void;
   onReplayButtonClick: () => void;
 }
 
-class AuthScreen extends PureComponent<Props, {}> {
-  private loginRef: RefObject<HTMLInputElement>;
-  private passwordRef: RefObject<HTMLInputElement>;
+class AuthScreen extends React.PureComponent<Props, {}> {
+  private loginRef: React.RefObject<HTMLInputElement>;
+  private passwordRef: React.RefObject<HTMLInputElement>;
 
   constructor(props) {
     super(props);
 
-    this.loginRef = createRef();
-    this.passwordRef = createRef();
+    this.loginRef = React.createRef();
+    this.passwordRef = React.createRef();
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }

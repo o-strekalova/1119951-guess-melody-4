@@ -1,11 +1,11 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import {Router} from "react-router-dom";
 import {GameScreen} from "./game-screen";
-import {GameType} from "../../const";
+import {GameType} from "../../types";
 import history from "../../history";
+import {noop} from "../../utils";
 
-const noop = () => {};
 const children = <div className="children-component" />;
 
 describe(`GameScreen component render correctly`, () => {

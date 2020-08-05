@@ -1,12 +1,13 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 import WelcomeScreen from "./welcome-screen";
+import {noop} from "../../utils";
 
 it(`Render WelcomeScreen`, () => {
   const tree = renderer
     .create(<WelcomeScreen
       errorsCount={3}
-      onWelcomeButtonClick={() => {}}
+      onWelcomeButtonClick={noop}
     />)
     .toJSON();
 

@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import * as React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {GameType} from "../../types";
@@ -14,7 +14,7 @@ interface Props {
   mistakes: number;
 }
 
-const GameScreen: FunctionComponent<Props> = (props: Props) => {
+const GameScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {
     type,
     children,

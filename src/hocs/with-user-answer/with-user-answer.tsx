@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import * as React from "react";
 import {Subtract} from "utility-types";
 import {QuestionGenre} from "../../types";
 
@@ -23,7 +23,7 @@ const withUserAnswer = (Component) => {
   type P = React.ComponentProps<typeof Component>;
   type T = Props & Subtract<P, InjectedProps>;
 
-  class WithUserAnswer extends PureComponent<T, State> {
+  class WithUserAnswer extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

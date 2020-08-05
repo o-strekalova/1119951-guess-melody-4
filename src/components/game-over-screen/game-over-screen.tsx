@@ -1,4 +1,4 @@
-import React, {FunctionComponent} from "react";
+import * as React from "react";
 import {Link} from "react-router-dom";
 import {AppRoute} from "../../const";
 
@@ -6,7 +6,7 @@ interface Props {
   onReplayButtonClick: () => void;
 }
 
-const GameOverScreen: FunctionComponent<Props> = (props: Props) => {
+const GameOverScreen: React.FunctionComponent<Props> = (props: Props) => {
   const {onReplayButtonClick} = props;
 
   return (
