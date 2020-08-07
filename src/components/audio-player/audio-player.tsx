@@ -6,7 +6,7 @@ interface Props {
   onPlayButtonClick: () => void;
 }
 
-export default class AudioPlayer extends React.PureComponent<Props, {}> {
+export default class AudioPlayer extends React.PureComponent<Props> {
 
   render() {
     const {isLoading, isPlaying, onPlayButtonClick, children} = this.props;
